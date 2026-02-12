@@ -912,3 +912,14 @@ body.locked{
   position: relative;
   z-index: 1;
 }
+.floaty-word{
+  padding: 8px 12px;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.10);
+  border: 1px solid rgba(255,255,255,0.18);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  font-weight: 800;
+  letter-spacing: .2px;
+  text-shadow: 0 10px 30px rgba(0,0,0,0.25);
+}
