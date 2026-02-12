@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Abhi ❤️ Pratha — Yay!</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
+</head>
+<body>
+    <div class="hearts-bg"></div>
+    <div class="aurora" aria-hidden="true"></div>
+    <div class="sparkles" aria-hidden="true"></div>
+
+    <div class="container yes-container">
+        <div class="badge-row" aria-label="names">
+            <span class="badge">Abhishek <span class="muted">(Abhi)</span></span>
+            <span class="badge">Pratha</span>
+            <span class="badge badge-alt">CPA Shab approved ✅</span>
+        </div>
+
+        <h1 class="yes-title">Yayyy Pratha! 🎉</h1>
+
+        
+        <div class="mascot" aria-hidden="true">
+            <svg class="mascot-svg" viewBox="0 0 200 200">
+                <defs>
+                    <linearGradient id="gradYay" x1="0" x2="1" y1="0" y2="1">
+                        <stop offset="0%" stop-color="#7cc5ff"/>
+                        <stop offset="100%" stop-color="#ff69b4"/>
+                    </linearGradient>
+                    <pattern id="bandhaniDotsYay" width="14" height="14" patternUnits="userSpaceOnUse">
+                        <circle cx="3" cy="3" r="1.6" fill="rgba(255,255,255,0.65)"/>
+                        <circle cx="11" cy="8" r="1.2" fill="rgba(255,255,255,0.45)"/>
+                        <circle cx="7" cy="12" r="1.0" fill="rgba(255,255,255,0.35)"/>
+                    </pattern>
+                </defs>
+                <path d="M100 175s-65-40-80-78c-12-30 6-60 35-65 20-3 36 7 45 22 9-15 25-25 45-22 29 5 47 35 35 65-15 38-80 78-80 78z"
+                      fill="url(#gradYay)" opacity="0.95"/>
+                <path d="M100 175s-65-40-80-78c-12-30 6-60 35-65 20-3 36 7 45 22 9-15 25-25 45-22 29 5 47 35 35 65-15 38-80 78-80 78z"
+                      fill="url(#bandhaniDotsYay)" opacity="0.55">
+                    <animate attributeName="opacity" values="0.35;0.65;0.35" dur="2.6s" repeatCount="indefinite"/>
+                </path>
+                <path d="M70 115c10 14 22 20 30 20s20-6 30-20" fill="none" stroke="rgba(255,255,255,0.80)" stroke-width="6" stroke-linecap="round"/>
+                <circle cx="68" cy="98" r="7" fill="rgba(255,255,255,0.80)"/>
+                <circle cx="132" cy="98" r="7" fill="rgba(255,255,255,0.80)"/>
+                <path class="wave" d="M35 145c18-10 34-10 52 0 18 10 34 10 52 0 18-10 34-10 52 0" fill="none" stroke="rgba(255,255,255,0.55)" stroke-width="3" stroke-linecap="round" stroke-dasharray="6 8"/>
+            </svg>
+            <div class="mascot-caption">CPA Shab approved ✅ • Bandhani celebration 💗💙</div>
+        </div>
+<p class="yes-message">You just made <b>Abhi</b> the happiest person! 💕</p>
+        <p class="yes-message" style="margin-top: 10px; font-weight: 800; opacity: .95;">
+            Okay Kitty… now we celebrate like it’s our favorite scene 💃🕺
+        </p>
+
+        <div class="buttons" style="margin-top: 22px;">
+            <button id="back-btn" class="ghost" onclick="window.location.href='index.html'">
+                Back to the question 🔙
+            </button>
+        </div>
+    </div>
+
+    <audio id="bg-music" loop>
+        <source src="music/beabadoobee - Glue Song (Lyrics).mp3" type="audio/mpeg">
+    </audio>
+
+    <button id="music-toggle" onclick="toggleMusic()" title="Toggle music">🔊</button>
+
+    <script src="mainscript.js"></script>
+</body>
+</html>

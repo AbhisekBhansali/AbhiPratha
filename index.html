@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Abhi ❤️ Pratha — Valentine?</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="locked">
+    <div class="hearts-bg"></div>
+
+    <!-- extra background layers for a richer look -->
+    <div class="aurora" aria-hidden="true"></div>
+    <div class="sparkles" aria-hidden="true"></div>
+
+    <!-- Royal invitation entry overlay -->
+    <div id="invitation-overlay" class="invitation-overlay" role="dialog" aria-modal="true" aria-label="Royal invitation">
+        <div class="invitation-card" aria-hidden="false">
+            <div class="invitation-curtain left" aria-hidden="true"></div>
+            <div class="invitation-curtain right" aria-hidden="true"></div>
+
+            <div class="invitation-content">
+                <div class="invitation-kicker">👑म्हारो प्यार थारा वास्ते सदा कायम 👑</div>
+                <div class="invitation-title">Abhishek ❤️ Pratha</div>
+                <div class="invitation-subtitle">A royal invite for Pratha ❤️ CPA Shab 😌</div>
+                <button id="open-invite" class="btn btn-primary" type="button">Open the invite ✨</button>
+                <div class="invitation-hint">Tap to enter</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Floating peacock feathers -->
+    <div class="feathers" aria-hidden="true"></div>
+
+    <div class="container">
+        <div class="badge-row" aria-label="names">
+            <span class="badge">Abhishek ❤️
+           <!-- <span class="badge">Pratha</span>-->
+            <button id="cpa-badge" class="badge badge-alt badge-click" type="button" aria-haspopup="dialog" aria-controls="cpa-modal">
+                Pratha 🐱 • CPA Shab 😌
+            </button>
+        </div>
+
+        <div class="title-line">Abhishek/Abhi ❤️ &amp; Pratha <span class="muted">(Kitty/CPA Shab 😌)</span></div>
+
+        <div class="layout">
+            <!-- LEFT: story (desktop-friendly) -->
+            <section class="story" aria-label="our story">
+                <h2>Our story ✨</h2>
+
+                <p>In this world full of random meetings and accidental moments… <b>Abhi</b> met <b>Pratha</b>.</p>
+
+                <p><b>Most people see here</b> — calm, graceful, sorted.<br>
+                   <b>Some lucky ones see her</b> — cute, soft, slightly dramatic, full of love.</p>
+
+                <p>And when she switches to serious mode? Everyone respectfully says…<br>
+                   <span class="quote">“CPA Shab is here. Please behave.”</span> 📊😎</p>
+
+                <p>Abhi thought he was the smart one… until Pratha corrected his life like she corrects balance sheets.</p>
+
+                <div class="mini-cols">
+                    <div class="mini-card">Abhi builds systems.<br><b>Pratha balances them.</b></div>
+                    <div class="mini-card">Abhi overthinks.<br><b>Pratha over-calculates.</b></div>
+                    <div class="mini-card">Abhi makes emotional investments.<br><b>Pratha makes sure ROI is lifetime guaranteed.</b> 💘</div>
+                </div>
+
+                <p>Sometimes she’s soft like “Kitty” 🐱<br>
+                   Sometimes she’s composed like “Pratha” 🌸<br>
+                   And sometimes…</p>
+
+                <p>She looks at Abhi and says:<br>
+                   <span class="quote">“Excuse me, this behavior is not compliant.”</span> — CPA Shab mode activated 😌📑</p>
+
+                <p class="soft">But here’s the truth… behind all the logic, spreadsheets, and seriousness — she has the purest heart.</p>
+
+                <p>And Abhi? He might handle architecture diagrams, Azure, plugins, and deadlines… but when it comes to Pratha — he is just a simple guy, hopelessly, deeply, peacefully in love.</p>
+
+                <p class="soft">She is his calm after a long day. His smile without reason. His safest place.</p>
+
+                <p><b>And whether she’s Pratha… or Kitty… or full-power CPA Shab… for Abhi, she’s always — Home. ❤️</b></p>
+
+                <h3>Bonus lines 😄</h3>
+                <ul class="bullets">
+                    <li>“CPA Shab may audit the world, but Abhi’s heart was already approved.”</li>
+                    <li>“Kitty controls Abhi’s mood better than any system controls data.”</li>
+                    <li>“Pratha manages finances, but Abhi manages loving her.”</li>
+                    <li>“In this partnership, profit is love and loss is impossible.”</li>
+                </ul>
+            </section>
+
+            <!-- RIGHT: proposal -->
+            <section class="proposal" aria-label="proposal">
+                <h1>Pratha, will you be my Valentine? 💕</h1>
+                <p class="sub">
+                    From <b>Abhi</b> — unlimited love, zero expiry, and full “I’ll fix it” support 🫶
+                </p>
+
+                <div class="mascot" aria-hidden="true">
+                    <svg class="mascot-svg" viewBox="0 0 200 200">
+                        <defs>
+                            <linearGradient id="gradLove" x1="0" x2="1" y1="0" y2="1">
+                                <stop offset="0%" stop-color="#ff69b4"/>
+                                <stop offset="100%" stop-color="#7cc5ff"/>
+                            </linearGradient>
+                            <!-- Rajasthani bandhani-style dot pattern -->
+                            <pattern id="bandhaniDots" width="14" height="14" patternUnits="userSpaceOnUse">
+                                <circle cx="3" cy="3" r="1.6" fill="rgba(255,255,255,0.65)"/>
+                                <circle cx="11" cy="8" r="1.2" fill="rgba(255,255,255,0.45)"/>
+                                <circle cx="7" cy="12" r="1.0" fill="rgba(255,255,255,0.35)"/>
+                            </pattern>
+                        </defs>
+                        <path d="M100 175s-65-40-80-78c-12-30 6-60 35-65 20-3 36 7 45 22 9-15 25-25 45-22 29 5 47 35 35 65-15 38-80 78-80 78z"
+                              fill="url(#gradLove)" opacity="0.95"/>
+                        <!-- bandhani overlay inside heart -->
+                        <path d="M100 175s-65-40-80-78c-12-30 6-60 35-65 20-3 36 7 45 22 9-15 25-25 45-22 29 5 47 35 35 65-15 38-80 78-80 78z"
+                              fill="url(#bandhaniDots)" opacity="0.55">
+                            <animate attributeName="opacity" values="0.35;0.65;0.35" dur="2.6s" repeatCount="indefinite"/>
+                        </path>
+                        <path d="M55 95c18-10 30-10 45 0 15 10 27 10 45 0" fill="none" stroke="rgba(255,255,255,0.75)" stroke-width="5" stroke-linecap="round"/>
+                        <circle cx="70" cy="120" r="6" fill="rgba(255,255,255,0.75)"/>
+                        <circle cx="100" cy="132" r="6" fill="rgba(255,255,255,0.75)"/>
+                        <circle cx="130" cy="120" r="6" fill="rgba(255,255,255,0.75)"/>
+                        <path d="M100 55c8 8 18 10 30 6" fill="none" stroke="rgba(255,255,255,0.55)" stroke-width="4" stroke-linecap="round"/>
+                        <!-- leheriya-style waves -->
+                        <path class="wave" d="M35 145c18-10 34-10 52 0 18 10 34 10 52 0 18-10 34-10 52 0" fill="none" stroke="rgba(255,255,255,0.55)" stroke-width="3" stroke-linecap="round" stroke-dasharray="6 8"/>
+                    </svg>
+                    <div class="mascot-caption">थारो Abhishek… थारी Pratha 💗💙</div>
+                </div>
+
+                <div class="buttons">
+                    <button id="yes-btn" onclick="handleYesClick()">Yes <span class="btn-emoji">💚</span></button>
+                    <button id="no-btn" onclick="handleNoClick()">No <span class="btn-emoji">😈</span></button>
+                </div>
+                <div id="tease-toast"></div>
+
+                <div class="tiny-note">राणी सा, ‘हां’ दबा द्यो… बाक़ी म्हूं संभाळ ल्यूं 😜❤️ try clicking <b>No</b>… if you can </div>
+            </section>
+        </div>
+    </div>
+
+    <audio id="bg-music" loop autoplay muted>
+        <source src="music/start.mp3" type="audio/mpeg">
+    </audio>
+
+    <button id="music-toggle" onclick="toggleMusic()" title="Toggle music">🔊</button>
+
+    <div class="credit" aria-hidden="true">Made with ❤️ by Abhi for Pratha</div>
+
+    <!-- CPA Shab modal -->
+    <div id="cpa-modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="cpa-title" aria-hidden="true">
+        <div class="modal-backdrop" data-close="true"></div>
+        <div class="modal-card" role="document">
+            <button class="modal-close" type="button" aria-label="Close" data-close="true">✕</button>
+            <div class="modal-badge">CPA Shab Audit Report ✅</div>
+            <h2 id="cpa-title">Compliance Summary</h2>
+            <p class="modal-sub">Patnership: <b>Abhi ❤️ Pratha</b> • Period: <b>Lifetime</b> • Risk: <b>Low</b> • Love: <b>High</b></p>
+
+            <div class="audit-grid">
+                <div class="audit-item">✅ Love ledger is balanced</div>
+                <div class="audit-item">✅ ROI: <b>Guaranteed</b></div>
+                <div class="audit-item">✅ Exception handling: <b>Hugs + Sorry + Glod</b></div>
+                <div class="audit-item">✅ SLA: <b>24x7 (emotionally)</b></div>
+            </div>
+
+            <div class="audit-quote">“Excuse me, this behavior is not compliant.” — <b>CPA Shab</b> 😌📑</div>
+
+            <div class="modal-actions">
+                <button class="ghost" type="button" data-close="true">Approved ✅</button>
+                <button class="ghost" type="button" id="print-audit">Download vibes (not PDF 😄)</button>
+            </div>
+        </div>
+    
+        <div class="fort-silhouette" aria-hidden="true"></div>
+</div>
+
+    <script src="script.js"></script>
+</body>
+</html>
