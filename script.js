@@ -19,7 +19,7 @@ const yesTeasePokes = [
   "Click No… I dare you 😏"
 ]
 
-/** ✅ Add your memories here (you said you will add your own) */
+/** ✅ Your memories */
 const floatyWords = [
   "Rao Jodha Park 👑",
   "Delhi📊",
@@ -57,10 +57,7 @@ const noBtn  = document.getElementById('no-btn')
 // MAIN music (after invite opens)
 const music = document.getElementById('bg-music')
 
-// INVITE overlay music (optional: add in HTML if you want separate track)
-// <audio id="invite-music" preload="auto" loop playsinline>
-//   <source src="music/invite.mp3" type="audio/mpeg">
-// </audio>
+// INVITE overlay music (optional)
 const inviteMusic = document.getElementById('invite-music')
 
 // CPA Shab modal wiring
@@ -72,6 +69,9 @@ const printAudit = document.getElementById('print-audit')
 const inviteOverlay = document.getElementById('invitation-overlay')
 const openInviteBtn = document.getElementById('open-invite')
 const feathersLayer = document.querySelector('.feathers')
+
+// ✅ NEW: words layer for continuous stream
+const wordsLayer = document.querySelector('.words')
 
 /* ---------------------- AUDIO HELPERS ---------------------- */
 
@@ -95,22 +95,19 @@ function resetAudio(audioEl) {
   try { audioEl.currentTime = 0 } catch (e) {}
 }
 
-/* ---------------------- WORD FLOATIES ---------------------- */
+/* ---------------------- WORD POP (single) ---------------------- */
 
 function popFloatyWord(text) {
   try {
     const el = document.createElement('div')
     el.className = 'floaty floaty-word'
     el.textContent = text
-
-    // random position (nice, not too messy)
     el.style.left = `${Math.random() * (window.innerWidth - 40)}px`
     el.style.top  = `${Math.random() * (window.innerHeight * 0.45) + window.innerHeight * 0.25}px`
     el.style.fontSize = `${14 + Math.random() * 10}px`
-
     document.body.appendChild(el)
     setTimeout(() => el.remove(), 1600)
-  } catch (e) { /* ignore */ }
+  } catch (e) {}
 }
 
 function popRandomMemoryWord(chance = 0.65) {
@@ -120,16 +117,46 @@ function popRandomMemoryWord(chance = 0.65) {
   popFloatyWord(w)
 }
 
+/* ---------------------- ✅ CONTINUOUS WORD FLOATERS (like feathers) ---------------------- */
+
+function createWordFloaters(count = 10) {
+  if (!wordsLayer) return
+  if (!floatyWords || floatyWords.length === 0) return
+
+  for (let i = 0; i < count; i++) {
+    const el = document.createElement('div')
+    el.className = 'word-floater'
+    el.textContent = floatyWords[Math.floor(Math.random() * floatyWords.length)]
+
+    const dur = 10 + Math.random() * 10           // 10s - 20s
+    const x = (Math.random() * 100).toFixed(2) + 'vw'
+    const drift = (-120 + Math.random() * 240).toFixed(1) + 'px'
+    const delay = `${-(Math.random() * dur)}s`    // negative delay => already in motion on load
+
+    el.style.left = x
+    el.style.setProperty('--dur', `${dur}s`)
+    el.style.setProperty('--drift', drift)
+    el.style.setProperty('--x', '0px')
+    el.style.setProperty('--delay', delay)
+
+    // slight size variation
+    el.style.fontSize = `${13 + Math.random() * 9}px`
+
+    wordsLayer.appendChild(el)
+  }
+}
+
+// Change this count if you want more/less words on screen
+createWordFloaters(12)
+
 /* ---------------------- INVITE FLOW ---------------------- */
 
-// Start invite music only when user interacts (browser-friendly)
 function primeInviteAudioOnce() {
   if (!inviteMusic) return
 
   inviteMusic.volume = 0.45
   inviteMusic.muted = false
 
-  // try on the first user gesture anywhere (click/tap)
   const starter = () => {
     safePlay(inviteMusic)
     document.removeEventListener('click', starter)
@@ -145,21 +172,17 @@ function enterRoyalInvite() {
 
   inviteOverlay.classList.add('opening')
 
-  // Stop invite music (if any)
   safePause(inviteMusic)
   resetAudio(inviteMusic)
 
-  // Start main music INSIDE the user gesture path
   if (music) {
     music.volume = 0.28
     music.muted = false
     safePlay(music)
   }
 
-  // cute memory word pop
-  popRandomMemoryWord(1) // always once on entry
+  popRandomMemoryWord(1)
 
-  // Remove overlay after animation
   setTimeout(() => {
     inviteOverlay.remove()
     document.body.classList.remove('locked')
@@ -169,13 +192,13 @@ function enterRoyalInvite() {
 if (inviteOverlay) {
   primeInviteAudioOnce()
 
-  // Click anywhere to open
   inviteOverlay.addEventListener('click', (e) => {
     if (e.target && (e.target.id === 'open-invite' || e.target === inviteOverlay)) {
       enterRoyalInvite()
     }
   })
 }
+
 if (openInviteBtn) {
   openInviteBtn.addEventListener('click', (e) => {
     e.preventDefault()
@@ -235,7 +258,6 @@ createFeathers()
 
 /* ---------------------- MUSIC DEFAULTS ---------------------- */
 
-// If there is NO invite overlay, attempt to play main music on first click
 if (music) {
   music.muted = true
   music.volume = 0.28
@@ -402,11 +424,10 @@ function popFloaty(text) {
     el.style.top = `${y}px`
     document.body.appendChild(el)
     setTimeout(() => el.remove(), 1200)
-  } catch (e) { /* ignore */ }
+  } catch (e) {}
 }
 
 function burstConfettiHearts() {
-  // sprinkle emojis
   for (let i = 0; i < 10; i++) {
     const el = document.createElement('div')
     el.className = 'floaty'
@@ -418,7 +439,6 @@ function burstConfettiHearts() {
     setTimeout(() => el.remove(), 1500)
   }
 
-  // sprinkle 1-2 memory words
   popRandomMemoryWord(1)
   popRandomMemoryWord(0.55)
 }
