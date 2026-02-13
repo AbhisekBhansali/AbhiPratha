@@ -6,10 +6,10 @@ const noMessages = [
   "Kitty please... 🥺",
   "CPA Shab, please reconsider 😌📊",
   "If you say no, Abhi will be sad... 😢",
-  "Please??? 💔",
+ "Hehe... catch me if you can 😜",
   "Don't do this to your Abhi...",
   "Last chance, Kitty! 😭",
-  "Hehe... catch me if you can 😜"
+  "Please??? 💔"
 ]
 
 const yesTeasePokes = [
