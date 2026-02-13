@@ -119,33 +119,49 @@ function popRandomMemoryWord(chance = 0.65) {
 
 /* ---------------------- ✅ CONTINUOUS WORD FLOATERS (like feathers) ---------------------- */
 
+function getContainerBounds() {
+  const c = document.querySelector('.container')
+  if (!c) return null
+  return c.getBoundingClientRect()
+}
+
 function createWordFloaters(count = 12) {
   if (!wordsLayer) return
   if (!floatyWords || floatyWords.length === 0) return
+
+  const bounds = getContainerBounds()
+  const vw = window.innerWidth
+
+  // fallback if container not found
+  const safeLeftMax  = bounds ? Math.max(0, bounds.left - 10) : vw * 0.18
+  const safeRightMin = bounds ? Math.min(vw, bounds.right + 10) : vw * 0.82
 
   for (let i = 0; i < count; i++) {
     const el = document.createElement('div')
     el.className = 'word-floater'
     el.textContent = floatyWords[Math.floor(Math.random() * floatyWords.length)]
 
-    const dur = 10 + Math.random() * 10 // 10s - 20s
-
-    // ✅ only left/right lanes (no center)
-    const laneWidth = 18 // percent on each side (tune 15–22)
-    const isLeft = Math.random() < 0.5
-
-    let xPercent
-    if (isLeft) {
-      xPercent = Math.random() * laneWidth                 // 0% .. 18%
-    } else {
-      xPercent = 100 - laneWidth + Math.random() * laneWidth // 82% .. 100%
-    }
-
-    // keep drift small so it doesn't enter center
-    const drift = (isLeft ? (20 + Math.random() * 50) : -(20 + Math.random() * 50)).toFixed(1) + 'px'
+    const dur = 10 + Math.random() * 10
     const delay = `${-(Math.random() * dur)}s`
 
-    el.style.left = `${xPercent}vw`
+    // choose LEFT or RIGHT gutter
+    const isLeft = Math.random() < 0.5
+
+    // place inside gutter with padding
+    let xPx
+    if (isLeft) {
+      const maxX = Math.max(10, safeLeftMax - 20)
+      xPx = Math.random() * maxX
+    } else {
+      const minX = Math.min(vw - 60, safeRightMin + 10)
+      const maxX = vw - 60
+      xPx = minX + Math.random() * Math.max(0, (maxX - minX))
+    }
+
+    // drift *towards* gutter edge, not into center
+    const drift = (isLeft ? (20 + Math.random() * 40) : -(20 + Math.random() * 40)).toFixed(1) + 'px'
+
+    el.style.left = `${xPx}px`
     el.style.setProperty('--dur', `${dur}s`)
     el.style.setProperty('--drift', drift)
     el.style.setProperty('--x', '0px')
@@ -157,8 +173,24 @@ function createWordFloaters(count = 12) {
 }
 
 
+
 // Change this count if you want more/less words on screen
 createWordFloaters(14)
+function resetWordFloaters() {
+  if (!wordsLayer) return
+  wordsLayer.innerHTML = ""
+  createWordFloaters(14)
+}
+
+// initial
+resetWordFloaters()
+
+// update on resize (debounced)
+let _wfTimer
+window.addEventListener('resize', () => {
+  clearTimeout(_wfTimer)
+  _wfTimer = setTimeout(resetWordFloaters, 250)
+})
 
 /* ---------------------- INVITE FLOW ---------------------- */
 
