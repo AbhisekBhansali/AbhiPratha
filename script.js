@@ -119,7 +119,7 @@ function popRandomMemoryWord(chance = 0.65) {
 
 /* ---------------------- ✅ CONTINUOUS WORD FLOATERS (like feathers) ---------------------- */
 
-function createWordFloaters(count = 10) {
+function createWordFloaters(count = 12) {
   if (!wordsLayer) return
   if (!floatyWords || floatyWords.length === 0) return
 
@@ -128,26 +128,37 @@ function createWordFloaters(count = 10) {
     el.className = 'word-floater'
     el.textContent = floatyWords[Math.floor(Math.random() * floatyWords.length)]
 
-    const dur = 10 + Math.random() * 10           // 10s - 20s
-    const x = (Math.random() * 100).toFixed(2) + 'vw'
-    const drift = (-120 + Math.random() * 240).toFixed(1) + 'px'
-    const delay = `${-(Math.random() * dur)}s`    // negative delay => already in motion on load
+    const dur = 10 + Math.random() * 10 // 10s - 20s
 
-    el.style.left = x
+    // ✅ only left/right lanes (no center)
+    const laneWidth = 18 // percent on each side (tune 15–22)
+    const isLeft = Math.random() < 0.5
+
+    let xPercent
+    if (isLeft) {
+      xPercent = Math.random() * laneWidth                 // 0% .. 18%
+    } else {
+      xPercent = 100 - laneWidth + Math.random() * laneWidth // 82% .. 100%
+    }
+
+    // keep drift small so it doesn't enter center
+    const drift = (isLeft ? (20 + Math.random() * 50) : -(20 + Math.random() * 50)).toFixed(1) + 'px'
+    const delay = `${-(Math.random() * dur)}s`
+
+    el.style.left = `${xPercent}vw`
     el.style.setProperty('--dur', `${dur}s`)
     el.style.setProperty('--drift', drift)
     el.style.setProperty('--x', '0px')
     el.style.setProperty('--delay', delay)
-
-    // slight size variation
     el.style.fontSize = `${13 + Math.random() * 9}px`
 
     wordsLayer.appendChild(el)
   }
 }
 
+
 // Change this count if you want more/less words on screen
-createWordFloaters(12)
+createWordFloaters(14)
 
 /* ---------------------- INVITE FLOW ---------------------- */
 
