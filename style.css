@@ -923,3 +923,41 @@ body.locked{
   letter-spacing: .2px;
   text-shadow: 0 10px 30px rgba(0,0,0,0.25);
 }
+/* Word floaters layer */
+.words {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 3; /* adjust if you want behind/above things */
+}
+
+/* Each word bubble */
+.word-floater{
+  position: absolute;
+  top: -60px;
+  left: 0;
+  padding: 8px 12px;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.10);
+  border: 1px solid rgba(255,255,255,0.18);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  font-weight: 800;
+  letter-spacing: .2px;
+  text-shadow: 0 10px 30px rgba(0,0,0,0.25);
+  white-space: nowrap;
+  transform: translateZ(0);
+  opacity: 0.95;
+
+  animation: wordFall var(--dur, 14s) linear infinite;
+  animation-delay: var(--delay, 0s);
+}
+
+/* Falling with gentle drift */
+@keyframes wordFall {
+  0%   { transform: translate(var(--x, 0px), -80px); opacity: 0; }
+  10%  { opacity: 0.95; }
+  100% { transform: translate(calc(var(--x, 0px) + var(--drift, 80px)), calc(100vh + 120px)); opacity: 0; }
+}
+
