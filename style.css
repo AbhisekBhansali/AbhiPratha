@@ -960,4 +960,9 @@ body.locked{
   10%  { opacity: 0.95; }
   100% { transform: translate(calc(var(--x, 0px) + var(--drift, 80px)), calc(100vh + 120px)); opacity: 0; }
 }
+.word-floater{
+  max-width: 18vw;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 
