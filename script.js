@@ -19,6 +19,31 @@ const yesTeasePokes = [
   "Click No… I dare you 😏"
 ]
 
+/** ✅ Add your memories here (you said you will add your own) */
+const floatyWords = [
+  "Rao Jodha Park 👑",
+  "Delhi📊",
+  "Elance 💗💙",
+  "Manali📸",
+  "Dubai Flight💞",
+  "Jaipur Flight",
+  "Bengluru💞",
+  "Marathalli",
+  "Hanuman ji🚩",
+  "🛕Mysuru💞🚗",
+  "Puri🚩",
+  "Coorg🚗",
+  "Eon 🚗",
+  "Blu📊",
+  "CPA📊",
+  "Aadrik💘",
+  "Aadrik 🤗",
+  "Dubai Flight💞",
+  "Dubai😌",
+  "94103🏡",
+  "DK📊"
+]
+
 let yesTeasedCount = 0
 let noClickCount = 0
 let runawayEnabled = false
@@ -32,7 +57,7 @@ const noBtn  = document.getElementById('no-btn')
 // MAIN music (after invite opens)
 const music = document.getElementById('bg-music')
 
-// INVITE overlay music (add in HTML if you want separate track)
+// INVITE overlay music (optional: add in HTML if you want separate track)
 // <audio id="invite-music" preload="auto" loop playsinline>
 //   <source src="music/invite.mp3" type="audio/mpeg">
 // </audio>
@@ -62,16 +87,37 @@ function safePlay(audioEl) {
 
 function safePause(audioEl) {
   if (!audioEl) return
-  try {
-    audioEl.pause()
-  } catch (e) {}
+  try { audioEl.pause() } catch (e) {}
 }
 
 function resetAudio(audioEl) {
   if (!audioEl) return
+  try { audioEl.currentTime = 0 } catch (e) {}
+}
+
+/* ---------------------- WORD FLOATIES ---------------------- */
+
+function popFloatyWord(text) {
   try {
-    audioEl.currentTime = 0
-  } catch (e) {}
+    const el = document.createElement('div')
+    el.className = 'floaty floaty-word'
+    el.textContent = text
+
+    // random position (nice, not too messy)
+    el.style.left = `${Math.random() * (window.innerWidth - 40)}px`
+    el.style.top  = `${Math.random() * (window.innerHeight * 0.45) + window.innerHeight * 0.25}px`
+    el.style.fontSize = `${14 + Math.random() * 10}px`
+
+    document.body.appendChild(el)
+    setTimeout(() => el.remove(), 1600)
+  } catch (e) { /* ignore */ }
+}
+
+function popRandomMemoryWord(chance = 0.65) {
+  if (!floatyWords || floatyWords.length === 0) return
+  if (Math.random() > chance) return
+  const w = floatyWords[Math.floor(Math.random() * floatyWords.length)]
+  popFloatyWord(w)
 }
 
 /* ---------------------- INVITE FLOW ---------------------- */
@@ -83,7 +129,7 @@ function primeInviteAudioOnce() {
   inviteMusic.volume = 0.45
   inviteMusic.muted = false
 
-  // We try on the first user gesture anywhere (click/tap)
+  // try on the first user gesture anywhere (click/tap)
   const starter = () => {
     safePlay(inviteMusic)
     document.removeEventListener('click', starter)
@@ -103,12 +149,15 @@ function enterRoyalInvite() {
   safePause(inviteMusic)
   resetAudio(inviteMusic)
 
-  // Start main music INSIDE the user gesture path (this function is called from click handler)
+  // Start main music INSIDE the user gesture path
   if (music) {
     music.volume = 0.28
     music.muted = false
     safePlay(music)
   }
+
+  // cute memory word pop
+  popRandomMemoryWord(1) // always once on entry
 
   // Remove overlay after animation
   setTimeout(() => {
@@ -120,14 +169,13 @@ function enterRoyalInvite() {
 if (inviteOverlay) {
   primeInviteAudioOnce()
 
-  // Click anywhere on overlay or the button opens the invite
+  // Click anywhere to open
   inviteOverlay.addEventListener('click', (e) => {
     if (e.target && (e.target.id === 'open-invite' || e.target === inviteOverlay)) {
       enterRoyalInvite()
     }
   })
 }
-
 if (openInviteBtn) {
   openInviteBtn.addEventListener('click', (e) => {
     e.preventDefault()
@@ -139,6 +187,7 @@ if (openInviteBtn) {
 
 function createFeathers(count = 11) {
   if (!feathersLayer) return
+
   const featherSvg = (seed=0) => `
     <svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
       <defs>
@@ -163,6 +212,7 @@ function createFeathers(count = 11) {
       <circle cx="66" cy="34" r="2.3" fill="rgba(255,255,255,0.9)"/>
     </svg>
   `
+
   for (let i=0; i<count; i++) {
     const el = document.createElement('div')
     el.className = 'feather'
@@ -180,6 +230,7 @@ function createFeathers(count = 11) {
     feathersLayer.appendChild(el)
   }
 }
+
 createFeathers()
 
 /* ---------------------- MUSIC DEFAULTS ---------------------- */
@@ -225,6 +276,7 @@ function handleYesClick() {
     yesTeasedCount++
     showTeaseMessage(msg)
     popFloaty("😏")
+    popRandomMemoryWord(0.85)
     return
   }
   burstConfettiHearts()
@@ -241,7 +293,9 @@ function showTeaseMessage(msg) {
 
 function handleNoClick() {
   noClickCount++
+
   popFloaty(noClickCount < 3 ? "🥺" : (noClickCount < 5 ? "💔" : "😈"))
+  popRandomMemoryWord(0.75)
 
   const msgIndex = Math.min(noClickCount, noMessages.length - 1)
   noBtn.textContent = noMessages[msgIndex]
@@ -287,6 +341,7 @@ if (cpaBadge) {
   cpaBadge.addEventListener('click', () => {
     openModal()
     popFloaty('📊')
+    popRandomMemoryWord(0.95)
   })
 }
 
@@ -305,6 +360,7 @@ if (printAudit) {
   printAudit.addEventListener('click', () => {
     burstConfettiHearts()
     showTeaseMessage("CPA Shab says: approved ✅ (No paperwork today 😄)")
+    popRandomMemoryWord(1)
   })
 }
 
@@ -350,6 +406,7 @@ function popFloaty(text) {
 }
 
 function burstConfettiHearts() {
+  // sprinkle emojis
   for (let i = 0; i < 10; i++) {
     const el = document.createElement('div')
     el.className = 'floaty'
@@ -360,4 +417,8 @@ function burstConfettiHearts() {
     document.body.appendChild(el)
     setTimeout(() => el.remove(), 1500)
   }
+
+  // sprinkle 1-2 memory words
+  popRandomMemoryWord(1)
+  popRandomMemoryWord(0.55)
 }
